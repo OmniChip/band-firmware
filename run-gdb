@@ -1,0 +1,2 @@
+#!/bin/bash
+exec arm-none-eabi-gdb -ex 'target remote 127.0.0.1:2331' _build/nrf52832_xxaa.out

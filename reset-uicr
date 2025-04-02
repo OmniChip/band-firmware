@@ -1,0 +1,19 @@
+#!/bin/bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (c) 2019-2020, OmniChip sp. z o.o.
+# Author: Michał Mirosław
+
+function gen_uicr_hex() {
+	echo ':020000041000EA'
+	echo ':101200001500000015000000FFFFFFFFFFFFFFFFBC'
+	echo ':00000001FF'
+}
+
+HF=$(mktemp)
+trap 'rm -f "$HF"' EXIT
+
+gen_uicr_hex > "$HF"
+cat "$HF"
+
+nrfjprog --eraseuicr
+nrfjprog --program "$HF"

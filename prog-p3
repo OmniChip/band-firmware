@@ -1,0 +1,24 @@
+#!/bin/bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (c) 2019-2020, OmniChip sp. z o.o.
+# Author: Michał Mirosław
+
+D=$(dirname "$0")
+
+function prog() {
+	nrfjprog -f nrf52 -c 250 --program "$1" ${2:+--sectorerase}
+	nrfjprog -f nrf52 -c 250 --reset
+}
+
+if [ -n "$1" ]; then
+	read -p 'go serial (enter)?' xxignore
+	"$D"/prog-serial "$1" -c 250
+fi
+
+read -p 'go app (enter)?' xxignore
+prog "$D"/_build/nrf52832_xxaa.hex E
+
+read -p 'go SoftDevice (enter)?' xxignore
+prog "$D"/SDK/components/softdevice/s132/hex/s132_nrf52_*_softdevice.hex E
+
+

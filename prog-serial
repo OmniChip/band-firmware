@@ -1,0 +1,33 @@
+#!/bin/bash
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (c) 2019-2020, OmniChip sp. z o.o.
+# Author: Michał Mirosław
+
+function gen_sn_hex() {
+	sn=$1
+
+	sn1=$((sn & 0xFF))
+	sn2=$(((sn>>8) & 0xFF))
+	sn3=$(((sn>>16) & 0xFF))
+	sn4=$(((sn>>24) & 0xFF))
+	csum=$((0x04+0x10+0xFC+sn1+sn2+sn3+sn4))
+	csum=$(((-(csum & 0xFF)) & 0xFF))
+
+	echo ':020000041000EA'
+	printf ':0410FC00%02X%02X%02X%02X%02X\n' $sn1 $sn2 $sn3 $sn4 $csum
+	echo ':00000001FF'
+}
+
+if ! (: $((0x$1))) 2>/dev/null; then
+	echo "$0: bad SN" >&2
+	exit 1
+fi
+
+HF=$(mktemp)
+trap 'rm -f "$HF"' EXIT
+
+gen_sn_hex "0x$1" > "$HF"
+cat "$HF"
+shift
+
+nrfjprog -f nrf52 --program "$HF" "$@"

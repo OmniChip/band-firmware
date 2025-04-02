@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<descriptor xmlns="http://digimend.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://digimend.sourceforge.net hidrd.xsd">
+  <usage_page>desktop<!-- Generic desktop controls (01h) --></usage_page>
+  <usage>8<!-- multi-axis controller (08h, application collection) --></usage>
+  <COLLECTION type="application">
+
+	<!-- timestamp: 24-bit, 0.1ms -->
+    <usage_page>20<!-- sensors --></usage_page>
+    <usage>529<!-- timestamp --></usage>
+    <logical_minimum>0</logical_minimum>
+    <logical_maximum>16777215</logical_maximum>
+    <report_size>24</report_size>
+    <report_count>1</report_count>
+    <unit_exponent>-4</unit_exponent>
+    <input>
+      <variable/>
+      <wrap/>
+      <no_preferred/>
+    </input>
+
+	<!-- temperature: 8-bit [ADC/8 = 0.5 K/LSB + Toffs] -->
+    <usage>434<!-- temperature [deg C] --></usage>
+    <logical_minimum>-128</logical_minimum>
+    <logical_maximum>127</logical_maximum>
+    <physical_minimum>-390</physical_minimum><!-- 25 degC + LogR/2 degC/LSB [FIXME: Toffs = 25 +/- 15 degC] -->
+    <physical_maximum>885</physical_maximum>
+    <report_size>8</report_size>
+    <unit_exponent>-1</unit_exponent>
+    <input>
+      <variable/>
+      <no_preferred/>
+    </input>
+
+    <usage>76<!-- gyrometer 3D --></usage>
+  <COLLECTION type="physical">
+	<!-- gyro: 3x16-bit -->
+    <usage_minimum>457<!-- angV@X [deg/s] --></usage_minimum>
+    <usage_maximum>459<!-- angV@Z [deg/s] --></usage_maximum>
+    <report_size>16</report_size>
+    <report_count>3</report_count>
+    <logical_minimum>-32767</logical_minimum>
+    <logical_maximum>32767</logical_maximum>
+    <physical_minimum>-229369</physical_minimum><!-- FIXME 2kdeg/s range: LogR * 70e-3 /LSB * 1 deg/s -->
+    <physical_maximum>229369</physical_maximum>
+    <unit_exponent>-2</unit_exponent>
+    <input>
+      <variable/>
+    </input>
+	<!-- mult = 2^n, n = 0..3 -->
+    <usage>5456<!-- resolution | angular velocity --></usage>
+    <logical_minimum>0</logical_minimum>
+    <logical_maximum>3</logical_maximum>
+    <physical_minimum>0</physical_minimum>
+    <physical_maximum>0</physical_maximum>
+    <unit_exponent>0</unit_exponent>
+    <report_size>2</report_size>
+    <report_count>1</report_count>
+    <feature>
+      <variable/>
+    </feature>
+
+    <report_size>1</report_size>
+    <report_count>2</report_count>
+    <feature><constant/><variable/></feature><!-- padding -->
+
+    <usage>319<!-- power state --></usage>
+    <logical_minimum>0</logical_minimum>
+    <logical_maximum>1</logical_maximum>
+    <report_size>1</report_size>
+    <report_count>1</report_count>
+  <COLLECTION type="logical">
+	<usage>855<!-- D4: power off --></usage>
+	<usage>851<!-- D0: full power --></usage>
+	<feature/>
+  </COLLECTION>
+
+    <report_count>3</report_count>
+    <feature><constant/><variable/></feature><!-- padding -->
+  </COLLECTION><!-- phys: gyro -->
+
+    <usage>73<!-- accelerometer 3D --></usage>
+  <COLLECTION type="physical">
+	<!-- accel: 3x16-bit -->
+    <usage_minimum>453<!-- accel@X [G] --></usage_minimum>
+    <usage_maximum>455<!-- accel@Z [G] --></usage_maximum>
+    <report_size>16</report_size>
+    <report_count>3</report_count>
+    <logical_minimum>-32767</logical_minimum>
+    <logical_maximum>32767</logical_maximum>
+    <physical_minimum>-15990296</physical_minimum><!-- FIXME 16g range: LogR * 488e-6 G/LSB -->
+    <physical_maximum>15990296</physical_maximum>
+    <unit_exponent>-6</unit_exponent>
+    <input>
+      <variable/>
+    </input>
+
+	<!-- mult = 2^n, n = 0..2 -->
+    <usage>5452<!-- resolution | acceleration --></usage>
+    <logical_minimum>0</logical_minimum>
+    <logical_maximum>2</logical_maximum>
+    <physical_minimum>0</physical_minimum>
+    <physical_maximum>0</physical_maximum>
+    <unit_exponent>0</unit_exponent>
+    <report_size>2</report_size>
+    <report_count>1</report_count>
+    <feature>
+      <variable/>
+    </feature>
+
+    <report_size>1</report_size>
+    <report_count>2</report_count>
+    <feature><constant/><variable/></feature><!-- padding -->
+
+    <usage>319<!-- power state --></usage>
+    <logical_minimum>0</logical_minimum>
+    <logical_maximum>1</logical_maximum>
+    <physical_minimum>0</physical_minimum>
+    <physical_maximum>0</physical_maximum>
+    <report_size>1</report_size>
+    <report_count>1</report_count>
+  <COLLECTION type="logical">
+	<usage>855<!-- D4: power off --></usage>
+	<usage>851<!-- D0: full power --></usage>
+	<feature/>
+  </COLLECTION>
+
+    <report_count>3</report_count>
+    <feature><constant/><variable/></feature><!-- padding -->
+  </COLLECTION><!-- phys: accel -->
+
+  </COLLECTION><!-- app: sensor -->
+
+<!--
+    <usage_page>F<!- - physical interface (0Fh) - -></usage_page>
+	<!- - TODO: force feedback - ->
+-->
+</descriptor>

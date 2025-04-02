@@ -1,0 +1,51 @@
+{
+   "uuid16bitServiceDefinitions": {
+      "1833": {
+         "name": "giBand Inertial Sensor Service"
+      },
+      "1844": {
+         "name": "giBand Vibration Control Service"
+      }
+   },
+   "uuid16bitCharacteristicDefinitions": {
+      "29FE": {
+         "name": "Sensor Data"
+      },
+      "29FD": {
+         "name": "Sensor Zero Offset"
+      },
+      "29F8": {
+         "name": "Sensor Data Decimation"
+      },
+      "29F9": {
+         "name": "CLK1M Frequency"
+      },
+      "29F7": {
+         "name": "Sensor Reset"
+      },
+      "29FA": {
+         "name": "Time Synchronization Group"
+      },
+      "29FB": {
+         "name": "Time Synchronization Step Counter"
+      },
+      "29FC": {
+         "name": "Time Synchronization Mode"
+      },
+      "29F6": {
+         "name": "Voltage Data"
+      },
+      "29F2": {
+         "name": "Mangetic Field Zero Offset"
+      },
+      "29F3": {
+         "name": "Mangetic Field Correction Matrix"
+      },
+      "29F0": {
+         "name": "Vibration Control"
+      },
+      "29F1": {
+         "name": "Vibration Motor Parameters"
+      }
+   }
+}

@@ -1,0 +1,1 @@
+SDK/examples/ble_peripheral/ble_app_hids_mouse/pca10040/s132/armgcc/ble_app_hids_mouse_gcc_nrf52.ld
